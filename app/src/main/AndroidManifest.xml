@@ -15,6 +15,9 @@
             android:name=".MatchCreation"
             android:exported="false" />
         <activity
+            android:name=".GameDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
