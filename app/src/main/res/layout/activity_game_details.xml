@@ -383,7 +383,12 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
-
     </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navmenu"
+        />
 
 </LinearLayout>
