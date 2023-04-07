@@ -22,23 +22,20 @@ public class History extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
         handler = new Handler();
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.menuCreate) {
-                    handler.post(()-> {
-                        Intent intent = new Intent(History.this, MatchCreation.class);
-                        startActivity(intent);
-                    });
-                } else if (id == R.id.menuDetails) {
-                    handler.post(()-> {
-                        Intent intent = new Intent(History.this, GameDetailsActivity.class);
-                        startActivity(intent);
-                    });
-                }
-                return true;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menuCreate) {
+                handler.post(()-> {
+                    Intent intent = new Intent(History.this, MatchCreation.class);
+                    startActivity(intent);
+                });
+            } else if (id == R.id.menuDetails) {
+                handler.post(()-> {
+                    Intent intent = new Intent(History.this, GameDetailsActivity.class);
+                    startActivity(intent);
+                });
             }
+            return true;
         });
     }
 }
