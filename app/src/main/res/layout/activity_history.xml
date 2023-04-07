@@ -32,7 +32,7 @@
                 android:background="#3E7C17"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="Historique"
+                android:text="@string/history"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="34sp" />
