@@ -21,14 +21,9 @@ public class MatchCreation extends AppCompatActivity {
         handler = new Handler();
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-             if (id == R.id.menuDetails) {
+            if (id == R.id.menuHistory) {
                 handler.post(()-> {
-                    Intent intent = new Intent(MatchCreation.this, GameDetailsActivity.class);
-                    startActivity(intent);
-                });
-            }else if (id == R.id.menuHistory) {
-                handler.post(()-> {
-                    Intent intent = new Intent(MatchCreation.this, GameDetailsActivity.class);
+                    Intent intent = new Intent(MatchCreation.this, History.class);
                     startActivity(intent);
                 });
             }
