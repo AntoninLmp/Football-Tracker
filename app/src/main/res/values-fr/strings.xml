@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Football Tracker</string>
+    <string name="shots">Tirs</string>
+    <string name="shots_on_target">Tirs cadrés</string>
+    <string name="possession">Possession</string>
+    <string name="passes">Passes</string>
+    <string name="pass_accuracy">Précision des passes</string>
+    <string name="fouls">Fautes</string>
+    <string name="yellow_cards">Cartons jaunes</string>
+    <string name="red_cards">Cartons rouges</string>
+    <string name="offsides">Hors-jeu</string>
+    <string name="corners">Corners</string>
+    <string name="game_statistics">Statistiques du match</string>
+    <string name="history">Historique</string>
+    <string name="new_game">Nouveau match</string>
+    <string name="create_nav">Créer</string>
+    <string name="details_nav">Details</string>
+</resources>

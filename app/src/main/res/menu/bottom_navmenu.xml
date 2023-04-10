@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/menuCreate"
-        android:title="Create"
+        android:title="@string/create_nav"
         android:icon="@drawable/baseline_add_24"
         />
     <item
         android:id="@+id/menuDetails"
-        android:title="Details"
+        android:title="@string/details_nav"
         android:icon="@drawable/baseline_read_more_24"
         />
     <item
         android:id="@+id/menuHistory"
-        android:title="History"
+        android:title="@string/history"
         android:icon="@drawable/baseline_history_24"
         />
 </menu>
