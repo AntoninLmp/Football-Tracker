@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/foot"
     android:layout_height="match_parent"
+    android:background="@drawable/foot"
     tools:context=".MatchCreation">
 
     <LinearLayout
@@ -18,19 +18,21 @@
 
         <TextView
             android:id="@+id/textView"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="39dp"
             android:fontFamily="sans-serif-smallcaps"
-
             android:text="Match creation"
+
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="24sp" />
+
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,8 +51,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Nom de l'equipe"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,8 +66,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="textPersonName"
-                            />
+                            android:inputType="textPersonName" />
 
                         <EditText
                             android:id="@+id/NameEquipe2"
@@ -74,8 +75,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="textPersonName"
-                            />
+                            android:inputType="textPersonName" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -90,9 +90,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textColor="@color/white"
                         android:text="Score du match"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -130,8 +130,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Possession"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -145,8 +145,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/possession2"
@@ -155,8 +154,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -172,8 +170,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Tirs"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,8 +185,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/tirs2"
@@ -197,8 +194,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -214,8 +210,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Tirs cadrés"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -229,8 +225,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/shoot2"
@@ -239,8 +234,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -256,8 +250,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Passes"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -271,8 +265,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/pass2"
@@ -281,8 +274,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -298,8 +290,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Cartons"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -313,8 +305,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/card2"
@@ -323,8 +314,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -340,8 +330,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Hors Jeu"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -355,8 +345,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/outOfGame2"
@@ -365,10 +354,10 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -381,8 +370,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Fautes"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -396,8 +385,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/fault2"
@@ -406,10 +394,10 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -422,8 +410,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Corner"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -437,8 +425,7 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
 
                         <EditText
                             android:id="@+id/corner2"
@@ -447,10 +434,10 @@
                             android:layout_marginHorizontal="5dp"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:inputType="numberSigned"
-                            />
+                            android:inputType="numberSigned" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -468,11 +455,12 @@
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/bottom_navmenu"/>
+            app:menu="@menu/bottom_navmenu" />
     </LinearLayout>
 
 

@@ -7,11 +7,6 @@
         android:icon="@drawable/baseline_add_24"
         />
     <item
-        android:id="@+id/menuDetails"
-        android:title="@string/details_nav"
-        android:icon="@drawable/baseline_read_more_24"
-        />
-    <item
         android:id="@+id/menuHistory"
         android:title="@string/history"
         android:icon="@drawable/baseline_history_24"
