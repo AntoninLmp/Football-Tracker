@@ -29,11 +29,6 @@ public class History extends AppCompatActivity {
                     Intent intent = new Intent(History.this, MatchCreation.class);
                     startActivity(intent);
                 });
-            } else if (id == R.id.menuDetails) {
-                handler.post(()-> {
-                    Intent intent = new Intent(History.this, GameDetailsActivity.class);
-                    startActivity(intent);
-                });
             }
             return true;
         });
