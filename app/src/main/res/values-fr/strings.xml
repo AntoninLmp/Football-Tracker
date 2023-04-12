@@ -16,4 +16,11 @@
     <string name="new_game">Nouveau match</string>
     <string name="create_nav">Créer</string>
     <string name="details_nav">Details</string>
+    <string name="button_creation">Sauvegarder</string>
+    <string name="teamName">Nom d\'équipe</string>
+    <string name="shot">Tirs</string>
+    <string name="shotOnTarget">Tirs cadrés</string>
+    <string name="cards">Cartons</string>
+    <string name="out">Hors jeu</string>
+    <string name="faults">Fautes</string>
 </resources>
