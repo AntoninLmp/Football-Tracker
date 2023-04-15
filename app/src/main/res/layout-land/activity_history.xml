@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/android_gradient_3"
     tools:context=".History">
 
     <LinearLayout
@@ -22,7 +23,6 @@
             android:id="@+id/History"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#3E7C17"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="Historique"
@@ -44,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    android:textColor="@color/white"
                     android:text="06/04/2023" />
 
                 <LinearLayout
@@ -64,6 +65,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="O.M"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -74,6 +76,7 @@
                         android:layout_weight="0.5"
                         android:gravity="center"
                         android:text="4 - 0"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="28sp" />
 
@@ -84,6 +87,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="P.S.G"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -107,6 +111,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="O.M"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -117,6 +122,7 @@
                         android:layout_weight="0.5"
                         android:gravity="center"
                         android:text="4 - 0"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="28sp" />
 
@@ -127,6 +133,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="P.S.G"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -137,7 +144,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="05/04/2023" />
+                    android:text="05/04/2023"
+                    android:textColor="@color/white"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -157,6 +165,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="O.M"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
@@ -167,6 +176,7 @@
                         android:layout_weight="0.5"
                         android:gravity="center"
                         android:text="4 - 0"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="28sp" />
 
@@ -177,6 +187,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="P.S.G"
+                        android:textColor="@color/white"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
