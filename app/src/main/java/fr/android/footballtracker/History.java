@@ -24,7 +24,7 @@ public class History extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Handler handler;
     MyDataBaseHelper myDB;
-    ArrayList teamName1, teamName2, score;
+    ArrayList teamName1, teamName2, score, id;
     CustomAdapter customAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class History extends AppCompatActivity {
         teamName1 = new ArrayList();
         teamName2 = new ArrayList();
         score = new ArrayList();
+        id = new ArrayList();
 
         // Navigation Menu
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -54,7 +55,7 @@ public class History extends AppCompatActivity {
         });
 
         storeDataInArray();
-        customAdapter = new CustomAdapter(History.this, teamName1, teamName2,score);
+        customAdapter = new CustomAdapter(History.this, teamName1, teamName2, score, id);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(History.this));
     }
@@ -66,6 +67,7 @@ public class History extends AppCompatActivity {
         }else{
             // We get juste the important informations
             while(cursor.moveToNext()){
+                id.add(cursor.getString(0));
                 teamName1.add(cursor.getString(1));
                 teamName2.add(cursor.getString(11));
                 score.add(cursor.getString(2) + "-"+cursor.getString(12));

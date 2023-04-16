@@ -17,13 +17,14 @@ import java.util.logging.Handler;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList Team1, Team2, Score;
+    private ArrayList Team1, Team2, Score, id;
 
-    CustomAdapter(Context context, ArrayList Team1,ArrayList Team2, ArrayList Score){
+    CustomAdapter(Context context, ArrayList Team1,ArrayList Team2, ArrayList Score, ArrayList id){
         this.context = context;
         this.Team1 = Team1;
         this.Team2 = Team2;
         this.Score = Score;
+        this.id = id;
     }
     @NonNull
     @Override
@@ -40,6 +41,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.Score.setText(String.valueOf(Score.get(position)));
         holder.mainLayout.setOnClickListener(view -> {
             Intent details = new Intent(context, GameDetailsActivity.class);
+            details.putExtra("id", String.valueOf(id.get(position)));
             context.startActivity(details);
         });
     }

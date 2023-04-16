@@ -96,4 +96,14 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor readMatchId(String id){
+        String query = "SELECT * FROM "+ TABLE_MATCH + " WHERE ID = "+ id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
 }
