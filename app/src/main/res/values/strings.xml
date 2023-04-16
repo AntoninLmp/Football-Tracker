@@ -38,4 +38,14 @@
     <string name="new_game">New Game</string>
     <string name="create_nav">Create</string>
     <string name="details_nav">Details</string>
+    <string name="button_creation">Save</string>
+    <string name="teamName">Team Name</string>
+    <string name="shot">Shots</string>
+    <string name="shotOnTarget">Shots on target</string>
+    <string name="cards">Cards</string>
+    <string name="out">Out of game</string>
+    <string name="faults">Faults</string>
+
+
+
 </resources>
