@@ -30,14 +30,18 @@ public class History extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
         recyclerView = findViewById(R.id.recyclerViewHistory);
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
         handler = new Handler();
+
+        // Load Data from sqlite
         myDB = new MyDataBaseHelper(History.this);
         teamName1 = new ArrayList();
         teamName2 = new ArrayList();
         score = new ArrayList();
 
+        // Navigation Menu
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuCreate) {
@@ -55,10 +59,12 @@ public class History extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(History.this));
     }
     void storeDataInArray (){
+        // Get all row store in our table matchs
         Cursor cursor = myDB.readAllMatch();
         if (cursor.getCount() == 0){
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }else{
+            // We get juste the important informations
             while(cursor.moveToNext()){
                 teamName1.add(cursor.getString(1));
                 teamName2.add(cursor.getString(11));
