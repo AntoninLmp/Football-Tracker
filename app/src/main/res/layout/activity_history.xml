@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/android_gradient_3"
     tools:context=".History">
 
     <LinearLayout
@@ -34,6 +33,7 @@
                 android:text="@string/history"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:background="@color/green"
                 android:textSize="34sp" />
 
         </LinearLayout>
