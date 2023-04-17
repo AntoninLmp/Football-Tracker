@@ -23,4 +23,5 @@
     <string name="cards">Cartons</string>
     <string name="out">Hors jeu</string>
     <string name="faults">Fautes</string>
+    <string name="statTeam">Statistique de l\'équipe</string>
 </resources>

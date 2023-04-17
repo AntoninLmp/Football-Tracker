@@ -45,7 +45,5 @@
     <string name="cards">Cards</string>
     <string name="out">Out of game</string>
     <string name="faults">Faults</string>
-
-
-
+    <string name="statTeam">Team statistics</string>
 </resources>

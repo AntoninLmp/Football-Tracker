@@ -18,8 +18,8 @@ public class GameDetailsActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Handler handler;
-    TextView name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statFault1, statCorner1;
-    TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statFault2, statCorner2;
+    TextView name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
+    TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
     MyDataBaseHelper myDB;
     private String idMatch;
     @SuppressLint("MissingInflatedId")
@@ -37,6 +37,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         statShotOnTarget1 = findViewById(R.id.statShotOnTarget1);
         statPasses1 = findViewById(R.id.statPasses1);
         statCards1 = findViewById(R.id.statCards1);
+        statOut1 = findViewById(R.id.statOut1);
         statFault1 = findViewById(R.id.statFault1);
         statCorner1 = findViewById(R.id.statCorner1);
 
@@ -47,6 +48,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         statShotOnTarget2 = findViewById(R.id.statShotOnTarget2);
         statPasses2 = findViewById(R.id.statPasses2);
         statCards2 = findViewById(R.id.statCards2);
+        statOut2 = findViewById(R.id.statOut2);
         statFault2 = findViewById(R.id.statFault2);
         statCorner2 = findViewById(R.id.statCorner2);
 
@@ -89,7 +91,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         }else{
             // We get juste the important informations
             while(cursor.moveToNext()){
-                score.setText(cursor.getString(2) + "-" +cursor.getString(12));
+                score.setText(cursor.getString(2) + " - " +cursor.getString(12));
 
                 name1.setText(cursor.getString(1));
                 statPossession1.setText(cursor.getString(3));
@@ -97,6 +99,7 @@ public class GameDetailsActivity extends AppCompatActivity {
                 statShotOnTarget1.setText(cursor.getString(5));
                 statPasses1.setText(cursor.getString(6));
                 statCards1.setText(cursor.getString(7));
+                statOut1.setText(cursor.getString(8));
                 statFault1.setText(cursor.getString(9));
                 statCorner1.setText(cursor.getString(10));
 
@@ -106,6 +109,7 @@ public class GameDetailsActivity extends AppCompatActivity {
                 statShotOnTarget2.setText(cursor.getString(15));
                 statPasses2.setText(cursor.getString(16));
                 statCards2.setText(cursor.getString(17));
+                statOut2.setText(cursor.getString(18));
                 statFault2.setText(cursor.getString(19));
                 statCorner2.setText(cursor.getString(20));
             }
