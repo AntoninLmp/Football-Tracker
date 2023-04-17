@@ -20,6 +20,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     Handler handler;
     TextView name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
     TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
+    TextView statShotSuccess1, statShotSuccess2, statFaultTransfCard1, statFaultTransfCard2;
     MyDataBaseHelper myDB;
     private String idMatch;
     @SuppressLint("MissingInflatedId")
@@ -40,6 +41,8 @@ public class GameDetailsActivity extends AppCompatActivity {
         statOut1 = findViewById(R.id.statOut1);
         statFault1 = findViewById(R.id.statFault1);
         statCorner1 = findViewById(R.id.statCorner1);
+        statShotSuccess1 = findViewById(R.id.statShotSuccess1);
+        statFaultTransfCard1 = findViewById(R.id.statFaultTransfCard1);
 
         // Second Team
         name2 = findViewById(R.id.name2);
@@ -51,6 +54,8 @@ public class GameDetailsActivity extends AppCompatActivity {
         statOut2 = findViewById(R.id.statOut2);
         statFault2 = findViewById(R.id.statFault2);
         statCorner2 = findViewById(R.id.statCorner2);
+        statShotSuccess2 = findViewById(R.id.statShotSuccess2);
+        statFaultTransfCard2 = findViewById(R.id.statFaultTransfCard2);
 
 
         handler = new Handler();
@@ -112,6 +117,14 @@ public class GameDetailsActivity extends AppCompatActivity {
                 statOut2.setText(cursor.getString(18));
                 statFault2.setText(cursor.getString(19));
                 statCorner2.setText(cursor.getString(20));
+
+                //statistics
+
+                statShotSuccess1.setText(String.valueOf(Integer.parseInt(statShotOnTarget1.getText().toString()) * 100 /  Integer.parseInt(statShot1.getText().toString())) + "%");
+                statShotSuccess2.setText(String.valueOf(Integer.parseInt(statShotOnTarget2.getText().toString()) * 100 /  Integer.parseInt(statShot2.getText().toString())) + "%");
+
+                statFaultTransfCard1.setText(String.valueOf(Integer.parseInt(statCards1.getText().toString()) * 100 /  Integer.parseInt(statFault1.getText().toString())) + "%");
+                statFaultTransfCard2.setText(String.valueOf(Integer.parseInt(statCards2.getText().toString()) * 100 /  Integer.parseInt(statFault2.getText().toString())) + "%");
             }
         }
     }

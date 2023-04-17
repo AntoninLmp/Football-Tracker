@@ -24,4 +24,7 @@
     <string name="out">Hors jeu</string>
     <string name="faults">Fautes</string>
     <string name="statTeam">Statistique de l\'équipe</string>
+    <string name="statMoreteam">Plus de statistique</string>
+    <string name="statShotSuccess">Pourcentage de tirs réussis</string>
+    <string name="statFaultTransfCard">Pourcentage de fautes transformés en carton</string>
 </resources>
