@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/android_gradient_3"
     tools:context=".MatchCreation">
 
     <LinearLayout
@@ -22,9 +21,9 @@
             android:layout_height="39dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Match creation"
-
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:background="@color/green"
             android:textSize="24sp" />
 
         <ScrollView
@@ -81,7 +80,7 @@
                         android:layout_weight="1"
                         android:text="@string/teamName"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -116,7 +115,7 @@
                         android:layout_weight="1"
                         android:text="Score"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -152,7 +151,7 @@
                         android:layout_weight="1"
                         android:text="Possession"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -187,7 +186,7 @@
                         android:layout_weight="1"
                         android:text="@string/shot"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -222,7 +221,7 @@
                         android:layout_weight="1"
                         android:text="@string/shotOnTarget"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -257,7 +256,7 @@
                         android:layout_weight="1"
                         android:text="Passes"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
 
@@ -293,7 +292,7 @@
                         android:layout_weight="1"
                         android:text="@string/cards"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -328,7 +327,7 @@
                         android:layout_weight="1"
                         android:text="@string/out"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -363,7 +362,7 @@
                         android:layout_weight="1"
                         android:text="@string/faults"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -400,7 +399,7 @@
                         android:layout_weight="1"
                         android:text="Corner"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -426,7 +425,7 @@
                         android:gravity="center"
                         android:text="Add your best smile ..."
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <ImageButton
