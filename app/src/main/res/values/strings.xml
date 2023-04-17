@@ -45,7 +45,8 @@
     <string name="cards">Cards</string>
     <string name="out">Out of game</string>
     <string name="faults">Faults</string>
-
-
-
+    <string name="statTeam">Team statistics</string>
+    <string name="statMoreteam">More statistics</string>
+    <string name="statShotSuccess">Percentage of successful shots</string>
+    <string name="statFaultTransfCard">Percentage of fault transformed in card</string>
 </resources>

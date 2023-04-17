@@ -4,13 +4,16 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -36,6 +39,8 @@ public class MatchCreation extends AppCompatActivity {
     ImageButton buttonPhoto;
     Button buttonSave;
     String currentPhotoPath;
+    EditText team1_Name, team1_score, team1_possession, team1_shot, team1_shotTarget, team1_passes, team1_card, team1_out, team1_fault, team1_corner;
+    EditText team2_Name, team2_score, team2_possession, team2_shot, team2_shotTarget, team2_passes, team2_card, team2_out, team2_fault, team2_corner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,30 @@ public class MatchCreation extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
         buttonPhoto = findViewById(R.id.buttonPhoto);
+        
+        // First Team
+        team1_Name = findViewById(R.id.NameTeam1);
+        team1_score = findViewById(R.id.score1);
+        team1_possession = findViewById(R.id.possession1);
+        team1_shot = findViewById(R.id.shot1);
+        team1_shotTarget = findViewById(R.id.shotTarget1);
+        team1_passes = findViewById(R.id.passes1);
+        team1_card = findViewById(R.id.card1);
+        team1_out = findViewById(R.id.outOfGame1);
+        team1_fault = findViewById(R.id.fault1);
+        team1_corner = findViewById(R.id.corner1);
+        // Second Team
+        team2_Name = findViewById(R.id.NameTeam2);
+        team2_score = findViewById(R.id.score2);
+        team2_possession = findViewById(R.id.possession2);
+        team2_shot = findViewById(R.id.shot2);
+        team2_shotTarget = findViewById(R.id.shotTarget2);
+        team2_passes = findViewById(R.id.passes2);
+        team2_card = findViewById(R.id.card2);
+        team2_out = findViewById(R.id.outOfGame2);
+        team2_fault = findViewById(R.id.fault2);
+        team2_corner = findViewById(R.id.corner2);
+        // Saving button
         buttonSave = findViewById(R.id.buttonSave);
 
 
@@ -59,7 +88,32 @@ public class MatchCreation extends AppCompatActivity {
             return true;
         });
         buttonPhoto.setOnClickListener(view -> handler.post(this::askPermission));
-        buttonSave.setOnClickListener(view -> handler.post(Toast.makeText(MatchCreation.this, "Save", Toast.LENGTH_SHORT)::show));
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
+                myDB.addMatch(team1_Name.getText().toString(),
+                        Integer.parseInt(team1_score.getText().toString()),
+                        Float.parseFloat(team1_possession.getText().toString()),
+                        Integer.parseInt(team1_shot.getText().toString()),
+                        Integer.parseInt(team1_shotTarget.getText().toString()),
+                        Integer.parseInt(team1_passes.getText().toString()),
+                        Integer.parseInt(team1_card.getText().toString()),
+                        Integer.parseInt(team1_out.getText().toString()),
+                        Integer.parseInt(team1_fault.getText().toString()),
+                        Integer.parseInt(team1_corner.getText().toString()),
+                        team2_Name.getText().toString(),
+                        Integer.parseInt(team2_score.getText().toString()),
+                        Float.parseFloat(team2_possession.getText().toString()),
+                        Integer.parseInt(team2_shot.getText().toString()),
+                        Integer.parseInt(team2_shotTarget.getText().toString()),
+                        Integer.parseInt(team2_passes.getText().toString()),
+                        Integer.parseInt(team2_card.getText().toString()),
+                        Integer.parseInt(team2_out.getText().toString()),
+                        Integer.parseInt(team2_fault.getText().toString()),
+                        Integer.parseInt(team2_corner.getText().toString()));
+            }
+        });
     }
 
     private void askPermission() {

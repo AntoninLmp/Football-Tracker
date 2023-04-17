@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/android_gradient_3"
     tools:context=".MatchCreation">
 
     <LinearLayout
@@ -22,9 +21,9 @@
             android:layout_height="39dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="Match creation"
-
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:background="@color/green"
             android:textSize="24sp" />
 
         <ScrollView
@@ -42,31 +41,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingVertical="5dp">
-                    <TextView
-                        android:id="@+id/team1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/teamName"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
-                    <TextView
-                        android:id="@+id/team2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/teamName"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingVertical="5dp">
 
                     <EditText
-                        android:id="@+id/NameEquipe1"
+                        android:id="@+id/NameTeam1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -81,11 +58,11 @@
                         android:layout_weight="1"
                         android:text="@string/teamName"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/NameEquipe2"
+                        android:id="@+id/NameTeam2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -101,7 +78,7 @@
                     android:paddingVertical="5dp">
 
                     <EditText
-                        android:id="@+id/editTextNumberSigned"
+                        android:id="@+id/score1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -116,11 +93,11 @@
                         android:layout_weight="1"
                         android:text="Score"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/editTextNumberSigned2"
+                        android:id="@+id/score2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -152,7 +129,7 @@
                         android:layout_weight="1"
                         android:text="Possession"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -172,7 +149,7 @@
                     android:paddingVertical="5dp">
 
                     <EditText
-                        android:id="@+id/tirs1"
+                        android:id="@+id/shot1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -187,11 +164,11 @@
                         android:layout_weight="1"
                         android:text="@string/shot"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/tirs2"
+                        android:id="@+id/shot2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -207,7 +184,7 @@
                     android:paddingVertical="5dp">
 
                     <EditText
-                        android:id="@+id/shoot1"
+                        android:id="@+id/shotTarget1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -222,11 +199,11 @@
                         android:layout_weight="1"
                         android:text="@string/shotOnTarget"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/shoot2"
+                        android:id="@+id/shotTarget2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -242,7 +219,7 @@
                     android:paddingVertical="5dp">
 
                     <EditText
-                        android:id="@+id/pass1"
+                        android:id="@+id/passes1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -257,12 +234,12 @@
                         android:layout_weight="1"
                         android:text="Passes"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
 
                     <EditText
-                        android:id="@+id/pass2"
+                        android:id="@+id/passes2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="5dp"
@@ -293,7 +270,7 @@
                         android:layout_weight="1"
                         android:text="@string/cards"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -328,7 +305,7 @@
                         android:layout_weight="1"
                         android:text="@string/out"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -363,7 +340,7 @@
                         android:layout_weight="1"
                         android:text="@string/faults"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -400,7 +377,7 @@
                         android:layout_weight="1"
                         android:text="Corner"
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <EditText
@@ -426,7 +403,7 @@
                         android:gravity="center"
                         android:text="Add your best smile ..."
                         android:textAlignment="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/green"
                         android:textSize="16sp" />
 
                     <ImageButton
