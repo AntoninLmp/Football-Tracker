@@ -24,7 +24,7 @@ public class History extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Handler handler;
     MyDataBaseHelper myDB;
-    ArrayList teamName1, teamName2, score, id;
+    ArrayList<String> teamName1, teamName2, score, id;
     CustomAdapter customAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +37,10 @@ public class History extends AppCompatActivity {
 
         // Load Data from sqlite
         myDB = new MyDataBaseHelper(History.this);
-        teamName1 = new ArrayList();
-        teamName2 = new ArrayList();
-        score = new ArrayList();
-        id = new ArrayList();
+        teamName1 = new ArrayList<>();
+        teamName2 = new ArrayList<>();
+        score = new ArrayList<>();
+        id = new ArrayList<>();
 
         // Navigation Menu
         bottomNavigationView.setOnItemSelectedListener(item -> {

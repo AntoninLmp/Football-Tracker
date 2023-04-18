@@ -8,6 +8,9 @@
     android:layout_margin="10sp"
     android:id="@+id/recyclerViewXML">
 
+    <!--A CardView is an Android widget used to create a visually appealing
+    layout for displaying organized content with rounded corners and shadows.
+    The CardView is often used in applications to display lists of items.-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -11,9 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-
 public class GameDetailsActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
@@ -22,7 +19,7 @@ public class GameDetailsActivity extends AppCompatActivity {
     TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
     TextView statShotSuccess1, statShotSuccess2, statFaultTransfCard1, statFaultTransfCard2;
     MyDataBaseHelper myDB;
-    private String idMatch;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,13 +79,14 @@ public class GameDetailsActivity extends AppCompatActivity {
 
     void getIntentData(){
         if(getIntent().hasExtra("id")){
-            idMatch = getIntent().getStringExtra("id");
-            storeDataInArray(idMatch);
+            String idMatch = getIntent().getStringExtra("id");
+            setDataInFieldOnScreen(idMatch);
         }else{
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }
     }
-    void storeDataInArray (String id){
+    @SuppressLint("SetTextI18n")
+    void setDataInFieldOnScreen (String id){
         // Get all row store in our table matchs
         Cursor cursor = myDB.readMatchId(id);
         if (cursor.getCount() == 0){
@@ -120,11 +118,11 @@ public class GameDetailsActivity extends AppCompatActivity {
 
                 //statistics
 
-                statShotSuccess1.setText(String.valueOf(Integer.parseInt(statShotOnTarget1.getText().toString()) * 100 /  Integer.parseInt(statShot1.getText().toString())) + "%");
-                statShotSuccess2.setText(String.valueOf(Integer.parseInt(statShotOnTarget2.getText().toString()) * 100 /  Integer.parseInt(statShot2.getText().toString())) + "%");
+                statShotSuccess1.setText(Integer.parseInt(statShotOnTarget1.getText().toString()) * 100 / Integer.parseInt(statShot1.getText().toString()) + "%");
+                statShotSuccess2.setText(Integer.parseInt(statShotOnTarget2.getText().toString()) * 100 / Integer.parseInt(statShot2.getText().toString()) + "%");
 
-                statFaultTransfCard1.setText(String.valueOf(Integer.parseInt(statCards1.getText().toString()) * 100 /  Integer.parseInt(statFault1.getText().toString())) + "%");
-                statFaultTransfCard2.setText(String.valueOf(Integer.parseInt(statCards2.getText().toString()) * 100 /  Integer.parseInt(statFault2.getText().toString())) + "%");
+                statFaultTransfCard1.setText(Integer.parseInt(statCards1.getText().toString()) * 100 / Integer.parseInt(statFault1.getText().toString()) + "%");
+                statFaultTransfCard2.setText(Integer.parseInt(statCards2.getText().toString()) * 100 / Integer.parseInt(statFault2.getText().toString()) + "%");
             }
         }
     }

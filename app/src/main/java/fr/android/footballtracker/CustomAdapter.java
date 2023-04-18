@@ -17,9 +17,9 @@ import java.util.logging.Handler;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList Team1, Team2, Score, id;
+    private ArrayList<String> Team1, Team2, Score, id;
 
-    CustomAdapter(Context context, ArrayList Team1,ArrayList Team2, ArrayList Score, ArrayList id){
+    CustomAdapter(Context context, ArrayList<String> Team1,ArrayList<String> Team2, ArrayList<String> Score, ArrayList<String> id){
         this.context = context;
         this.Team1 = Team1;
         this.Team2 = Team2;
@@ -29,11 +29,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @NonNull
     @Override
     public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Create a view from XML layout
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_row_history, parent, false);
         return new MyViewHolder(view);
     }
 
+    // Remplace value inside a view (call by the layer manager)
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
         holder.Team1.setText(String.valueOf(Team1.get(position)));
@@ -46,11 +48,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         });
     }
 
+    // Returns the number of elements in the list
     @Override
     public int getItemCount() {
         return Team1.size();
     }
 
+    // Internal class that represents the views of the list
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Team1, Team2, Score;
         LinearLayout mainLayout;
