@@ -1,11 +1,17 @@
 package fr.android.footballtracker;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,10 +35,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-public class MatchCreation extends AppCompatActivity {
+public class MatchCreation extends AppCompatActivity implements LocationListener {
     private static final int PERMISSION_CAMERA_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 1;
+    private LocationManager locationManager;
+
+    private String location;
 
     BottomNavigationView bottomNavigationView;
     Handler handler;
@@ -111,9 +122,30 @@ public class MatchCreation extends AppCompatActivity {
                         Integer.parseInt(team2_card.getText().toString()),
                         Integer.parseInt(team2_out.getText().toString()),
                         Integer.parseInt(team2_fault.getText().toString()),
-                        Integer.parseInt(team2_corner.getText().toString()));
+                        Integer.parseInt(team2_corner.getText().toString()),
+                        location);
             }
         });
+
+        // 1- Request access to the location service
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // 2- Register to receive the locations events
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, (LocationListener) this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // 4- Unregister from the service when the activity becomes invisible
+        locationManager.removeUpdates(this);
     }
 
     private void askPermission() {
@@ -183,5 +215,23 @@ public class MatchCreation extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        // 3- Received a new location from the GPS
+        final double latitude = location.getLatitude();
+        final double longitude = location.getLongitude();
+
+        final Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            if (addresses != null) {
+                this.location = addresses.get(0).getAddressLine(0);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

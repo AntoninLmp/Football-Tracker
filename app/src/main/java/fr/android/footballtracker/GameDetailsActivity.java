@@ -18,7 +18,7 @@ public class GameDetailsActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Handler handler;
-    TextView name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
+    TextView location, name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
     TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
     TextView statShotSuccess1, statShotSuccess2, statFaultTransfCard1, statFaultTransfCard2;
     MyDataBaseHelper myDB;
@@ -29,6 +29,7 @@ public class GameDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_details);
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
+        location = findViewById(R.id.location);
         score = findViewById(R.id.scoreMatch);
 
         // First Team
@@ -97,6 +98,7 @@ public class GameDetailsActivity extends AppCompatActivity {
             // We get juste the important informations
             while(cursor.moveToNext()){
                 score.setText(cursor.getString(2) + " - " +cursor.getString(12));
+                location.setText(cursor.getString(21));
 
                 name1.setText(cursor.getString(1));
                 statPossession1.setText(cursor.getString(3));
