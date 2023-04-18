@@ -49,4 +49,5 @@
     <string name="statMoreteam">More statistics</string>
     <string name="statShotSuccess">Percentage of successful shots</string>
     <string name="statFaultTransfCard">Percentage of fault transformed in card</string>
+    <string name="photoSentence">Add your best smile ...</string>
 </resources>

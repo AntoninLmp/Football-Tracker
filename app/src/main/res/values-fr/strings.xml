@@ -27,4 +27,5 @@
     <string name="statMoreteam">Plus de statistique</string>
     <string name="statShotSuccess">Pourcentage de tirs réussis</string>
     <string name="statFaultTransfCard">Pourcentage de fautes transformés en carton</string>
+    <string name="photoSentence">Ajout ton meilleur sourire ...</string>
 </resources>
