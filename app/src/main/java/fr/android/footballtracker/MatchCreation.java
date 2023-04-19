@@ -12,7 +12,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.tv.AdRequest;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -42,7 +44,6 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     private static final int PERMISSION_CAMERA_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 1;
     private LocationManager locationManager;
-
     private String location;
 
     BottomNavigationView bottomNavigationView;
@@ -99,32 +100,29 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
             return true;
         });
         buttonPhoto.setOnClickListener(view -> handler.post(this::askPermission));
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
-                myDB.addMatch(team1_Name.getText().toString(),
-                        Integer.parseInt(team1_score.getText().toString()),
-                        Float.parseFloat(team1_possession.getText().toString()),
-                        Integer.parseInt(team1_shot.getText().toString()),
-                        Integer.parseInt(team1_shotTarget.getText().toString()),
-                        Integer.parseInt(team1_passes.getText().toString()),
-                        Integer.parseInt(team1_card.getText().toString()),
-                        Integer.parseInt(team1_out.getText().toString()),
-                        Integer.parseInt(team1_fault.getText().toString()),
-                        Integer.parseInt(team1_corner.getText().toString()),
-                        team2_Name.getText().toString(),
-                        Integer.parseInt(team2_score.getText().toString()),
-                        Float.parseFloat(team2_possession.getText().toString()),
-                        Integer.parseInt(team2_shot.getText().toString()),
-                        Integer.parseInt(team2_shotTarget.getText().toString()),
-                        Integer.parseInt(team2_passes.getText().toString()),
-                        Integer.parseInt(team2_card.getText().toString()),
-                        Integer.parseInt(team2_out.getText().toString()),
-                        Integer.parseInt(team2_fault.getText().toString()),
-                        Integer.parseInt(team2_corner.getText().toString()),
-                        location);
-            }
+        buttonSave.setOnClickListener(view -> {
+            MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
+            myDB.addMatch(team1_Name.getText().toString(),
+                    Integer.parseInt(team1_score.getText().toString()),
+                    Float.parseFloat(team1_possession.getText().toString()),
+                    Integer.parseInt(team1_shot.getText().toString()),
+                    Integer.parseInt(team1_shotTarget.getText().toString()),
+                    Integer.parseInt(team1_passes.getText().toString()),
+                    Integer.parseInt(team1_card.getText().toString()),
+                    Integer.parseInt(team1_out.getText().toString()),
+                    Integer.parseInt(team1_fault.getText().toString()),
+                    Integer.parseInt(team1_corner.getText().toString()),
+                    team2_Name.getText().toString(),
+                    Integer.parseInt(team2_score.getText().toString()),
+                    Float.parseFloat(team2_possession.getText().toString()),
+                    Integer.parseInt(team2_shot.getText().toString()),
+                    Integer.parseInt(team2_shotTarget.getText().toString()),
+                    Integer.parseInt(team2_passes.getText().toString()),
+                    Integer.parseInt(team2_card.getText().toString()),
+                    Integer.parseInt(team2_out.getText().toString()),
+                    Integer.parseInt(team2_fault.getText().toString()),
+                    Integer.parseInt(team2_corner.getText().toString()),
+                    location);
         });
 
         // 1- Request access to the location service
@@ -232,7 +230,8 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         final double latitude = location.getLatitude();
         final double longitude = location.getLongitude();
 
-        final Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        final Geocoder geocoder = new Geocoder(this);
+
         try {
             final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
