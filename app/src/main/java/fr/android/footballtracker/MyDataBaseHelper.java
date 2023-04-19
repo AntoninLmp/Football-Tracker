@@ -44,7 +44,8 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
                 "team2_cards INTEGER DEFAULT 0," +
                 "team2_outOfGame INTEGER DEFAULT 0," +
                 "team2_fault INTEGER DEFAULT 0," +
-                "team2_corners INTEGER DEFAULT 0);";
+                "team2_corners INTEGER DEFAULT 0," +
+                "location TEXT NOT NULL);";
         db.execSQL(queryCreateTableTeam);
     }
 
@@ -54,7 +55,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void addMatch (String team1_name, int team1_score, float team1_possession, int team1_num_shots, int team1_num_shots_on_target, int team1_num_passes, int team1_cards,int team1_outOfGame, int team1_fault, int team1_corners,
-                         String team2_name, int team2_score, float team2_possession, int team2_num_shots, int team2_num_shots_on_target, int team2_num_passes, int team2_cards,int team2_outOfGame, int team2_fault, int team2_corners){
+                         String team2_name, int team2_score, float team2_possession, int team2_num_shots, int team2_num_shots_on_target, int team2_num_passes, int team2_cards,int team2_outOfGame, int team2_fault, int team2_corners, final String location){
         SQLiteDatabase db = this.getWritableDatabase();
         // Use to store the data of our application
         ContentValues contentValues = new ContentValues();
@@ -78,6 +79,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("team2_outOfGame", team2_outOfGame);
         contentValues.put("team2_fault", team2_fault);
         contentValues.put("team2_corners", team2_corners);
+        contentValues.put("location", location);
 
         long result = db.insert(TABLE_MATCH, null, contentValues);
         if (result == -1){
