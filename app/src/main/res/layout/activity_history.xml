@@ -45,60 +45,18 @@
             android:orientation="vertical"
             android:weightSum="1">
 
+            <!--
+            A RecyclerView is an advanced and flexible version of a ListView in Android that is used
+            to efficiently display large sets of data in a scrollable format. RecyclerView is a part
+            of the Android Support Library and provides many advantages over the traditional ListView,
+            including better performance, smoother scrolling, and the ability to easily customize
+            the layout of individual items.
+            -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
-
-            <!--
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5sp"
-                android:layout_marginTop="10sp"
-                android:layout_marginRight="5sp"
-                android:layout_marginBottom="10sp"
-                android:layout_weight="0.2"
-                android:background="@drawable/customborder"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:text="O.M"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:text="4 - 0"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="28sp" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:gravity="center"
-                    android:text="P.S.G"
-                    android:textColor="@color/white"
-                    android:textAlignment="center"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-            -->
-
 
         </LinearLayout>
 

@@ -190,6 +190,8 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         if (requestCode == PERMISSION_CAMERA_CODE && resultCode == Activity.RESULT_OK){
             //Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
             File newfile = new File(currentPhotoPath);
+
+            // to do
         }
     }
 
@@ -216,7 +218,9 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                 }
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
+                    // Create a Uri to store the picture
                     Uri photoURI = FileProvider.getUriForFile(this,"com.fr.android.footballtracker.android.fileprovider", photoFile);
+                    // We send to the intent the Uri where to save the file
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
                 }

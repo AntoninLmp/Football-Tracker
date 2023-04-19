@@ -89,6 +89,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /* GET DATA FUNCTION */
     public Cursor readAllMatch(){
         String query = "SELECT * FROM "+ TABLE_MATCH;
         SQLiteDatabase db = this.getReadableDatabase();
