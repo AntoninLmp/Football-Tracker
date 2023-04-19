@@ -61,7 +61,7 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
 
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
         buttonPhoto = findViewById(R.id.buttonPhoto);
-        
+
         // First Team
         team1_Name = findViewById(R.id.NameTeam1);
         team1_score = findViewById(R.id.score1);
@@ -91,7 +91,7 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuHistory) {
-                handler.post(()-> {
+                handler.post(() -> {
                     Intent intent = new Intent(MatchCreation.this, History.class);
                     startActivity(intent);
                 });
@@ -131,13 +131,22 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     protected void onResume() {
         super.onResume();
 
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+
         // 2- Register to receive the locations events
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, (LocationListener) this);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, this);
     }
 
     @Override
