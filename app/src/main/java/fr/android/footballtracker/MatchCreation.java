@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     private LocationManager locationManager;
     private String location;
 
+    private Handler handlerdb = new Handler(Looper.getMainLooper());
     BottomNavigationView bottomNavigationView;
     Handler handler;
     ImageButton buttonPhoto;
@@ -100,6 +102,8 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
             return true;
         });
         buttonPhoto.setOnClickListener(view -> handler.post(this::askPermission));
+
+
         buttonSave.setOnClickListener(view -> {
             MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
             myDB.addMatch(team1_Name.getText().toString(),
@@ -123,6 +127,30 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                     Integer.parseInt(team2_fault.getText().toString()),
                     Integer.parseInt(team2_corner.getText().toString()),
                     location);
+            handlerdb.post(new Runnable() {
+                    @Override
+                    public void run(){
+                        myDB.addMatchDB(team1_Name.getText().toString(),
+                                Integer.parseInt(team1_score.getText().toString()),
+                                Float.parseFloat(team1_possession.getText().toString()),
+                                Integer.parseInt(team1_shot.getText().toString()),
+                                Integer.parseInt(team1_shotTarget.getText().toString()),
+                                Integer.parseInt(team1_passes.getText().toString()),
+                                Integer.parseInt(team1_card.getText().toString()),
+                                Integer.parseInt(team1_out.getText().toString()),
+                                Integer.parseInt(team1_fault.getText().toString()),
+                                Integer.parseInt(team1_corner.getText().toString()),
+                                team2_Name.getText().toString(),
+                                Integer.parseInt(team2_score.getText().toString()),
+                                Float.parseFloat(team2_possession.getText().toString()),
+                                Integer.parseInt(team2_shot.getText().toString()),
+                                Integer.parseInt(team2_shotTarget.getText().toString()),
+                                Integer.parseInt(team2_passes.getText().toString()),
+                                Integer.parseInt(team2_card.getText().toString()),
+                                Integer.parseInt(team2_out.getText().toString()),
+                                Integer.parseInt(team2_fault.getText().toString()),
+                                Integer.parseInt(team2_corner.getText().toString()));
+                    }});
         });
 
         // 1- Request access to the location service
