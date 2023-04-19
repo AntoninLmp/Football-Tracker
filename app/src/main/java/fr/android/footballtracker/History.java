@@ -1,6 +1,5 @@
 package fr.android.footballtracker;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,13 +8,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.color.utilities.Score;
-import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -46,10 +41,10 @@ public class History extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuCreate) {
-                handler.post(()-> {
+                new Thread(() -> handler.post(()-> {
                     Intent intent = new Intent(History.this, MatchCreation.class);
                     startActivity(intent);
-                });
+                })).start();
             }
             return true;
         });

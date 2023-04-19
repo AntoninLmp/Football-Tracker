@@ -7,16 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-    private Context context;
+    private final Context context;
     private ArrayList<String> Team1, Team2, Score, id;
 
     CustomAdapter(Context context, ArrayList<String> Team1,ArrayList<String> Team2, ArrayList<String> Score, ArrayList<String> id){
