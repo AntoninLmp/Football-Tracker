@@ -1,12 +1,20 @@
 package fr.android.footballtracker;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.media.tv.AdRequest;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -29,10 +37,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-public class MatchCreation extends AppCompatActivity {
+public class MatchCreation extends AppCompatActivity implements LocationListener {
     private static final int PERMISSION_CAMERA_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 1;
+    private LocationManager locationManager;
+    private String location;
 
     BottomNavigationView bottomNavigationView;
     Handler handler;
@@ -50,7 +62,7 @@ public class MatchCreation extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavMenu);
         buttonPhoto = findViewById(R.id.buttonPhoto);
-        
+
         // First Team
         team1_Name = findViewById(R.id.NameTeam1);
         team1_score = findViewById(R.id.score1);
@@ -80,7 +92,7 @@ public class MatchCreation extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuHistory) {
-                handler.post(()-> {
+                handler.post(() -> {
                     Intent intent = new Intent(MatchCreation.this, History.class);
                     startActivity(intent);
                 });
@@ -88,32 +100,59 @@ public class MatchCreation extends AppCompatActivity {
             return true;
         });
         buttonPhoto.setOnClickListener(view -> handler.post(this::askPermission));
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
-                myDB.addMatch(team1_Name.getText().toString(),
-                        Integer.parseInt(team1_score.getText().toString()),
-                        Float.parseFloat(team1_possession.getText().toString()),
-                        Integer.parseInt(team1_shot.getText().toString()),
-                        Integer.parseInt(team1_shotTarget.getText().toString()),
-                        Integer.parseInt(team1_passes.getText().toString()),
-                        Integer.parseInt(team1_card.getText().toString()),
-                        Integer.parseInt(team1_out.getText().toString()),
-                        Integer.parseInt(team1_fault.getText().toString()),
-                        Integer.parseInt(team1_corner.getText().toString()),
-                        team2_Name.getText().toString(),
-                        Integer.parseInt(team2_score.getText().toString()),
-                        Float.parseFloat(team2_possession.getText().toString()),
-                        Integer.parseInt(team2_shot.getText().toString()),
-                        Integer.parseInt(team2_shotTarget.getText().toString()),
-                        Integer.parseInt(team2_passes.getText().toString()),
-                        Integer.parseInt(team2_card.getText().toString()),
-                        Integer.parseInt(team2_out.getText().toString()),
-                        Integer.parseInt(team2_fault.getText().toString()),
-                        Integer.parseInt(team2_corner.getText().toString()));
-            }
+        buttonSave.setOnClickListener(view -> {
+            MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
+            myDB.addMatch(team1_Name.getText().toString(),
+                    Integer.parseInt(team1_score.getText().toString()),
+                    Float.parseFloat(team1_possession.getText().toString()),
+                    Integer.parseInt(team1_shot.getText().toString()),
+                    Integer.parseInt(team1_shotTarget.getText().toString()),
+                    Integer.parseInt(team1_passes.getText().toString()),
+                    Integer.parseInt(team1_card.getText().toString()),
+                    Integer.parseInt(team1_out.getText().toString()),
+                    Integer.parseInt(team1_fault.getText().toString()),
+                    Integer.parseInt(team1_corner.getText().toString()),
+                    team2_Name.getText().toString(),
+                    Integer.parseInt(team2_score.getText().toString()),
+                    Float.parseFloat(team2_possession.getText().toString()),
+                    Integer.parseInt(team2_shot.getText().toString()),
+                    Integer.parseInt(team2_shotTarget.getText().toString()),
+                    Integer.parseInt(team2_passes.getText().toString()),
+                    Integer.parseInt(team2_card.getText().toString()),
+                    Integer.parseInt(team2_out.getText().toString()),
+                    Integer.parseInt(team2_fault.getText().toString()),
+                    Integer.parseInt(team2_corner.getText().toString()),
+                    location);
         });
+
+        // 1- Request access to the location service
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+
+        // 2- Register to receive the locations events
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // 4- Unregister from the service when the activity becomes invisible
+        locationManager.removeUpdates(this);
     }
 
     private void askPermission() {
@@ -183,5 +222,24 @@ public class MatchCreation extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        // 3- Received a new location from the GPS
+        final double latitude = location.getLatitude();
+        final double longitude = location.getLongitude();
+
+        final Geocoder geocoder = new Geocoder(this);
+
+        try {
+            final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            if (addresses != null) {
+                this.location = addresses.get(0).getAddressLine(0);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
