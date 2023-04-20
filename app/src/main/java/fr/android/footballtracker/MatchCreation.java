@@ -94,14 +94,17 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuHistory) {
-                handler.post(() -> {
+                new Thread(() -> handler.post(() -> {
                     Intent intent = new Intent(MatchCreation.this, History.class);
                     startActivity(intent);
-                });
+                })).start();
+
             }
             return true;
         });
-        buttonPhoto.setOnClickListener(view -> handler.post(this::askPermission));
+        buttonPhoto.setOnClickListener( view -> {
+            askPermission();
+        });
 
 
         buttonSave.setOnClickListener(view -> {
@@ -127,30 +130,26 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                     Integer.parseInt(team2_fault.getText().toString()),
                     Integer.parseInt(team2_corner.getText().toString()),
                     location);
-            handlerdb.post(new Runnable() {
-                    @Override
-                    public void run(){
-                        myDB.addMatchDB(team1_Name.getText().toString(),
-                                Integer.parseInt(team1_score.getText().toString()),
-                                Float.parseFloat(team1_possession.getText().toString()),
-                                Integer.parseInt(team1_shot.getText().toString()),
-                                Integer.parseInt(team1_shotTarget.getText().toString()),
-                                Integer.parseInt(team1_passes.getText().toString()),
-                                Integer.parseInt(team1_card.getText().toString()),
-                                Integer.parseInt(team1_out.getText().toString()),
-                                Integer.parseInt(team1_fault.getText().toString()),
-                                Integer.parseInt(team1_corner.getText().toString()),
-                                team2_Name.getText().toString(),
-                                Integer.parseInt(team2_score.getText().toString()),
-                                Float.parseFloat(team2_possession.getText().toString()),
-                                Integer.parseInt(team2_shot.getText().toString()),
-                                Integer.parseInt(team2_shotTarget.getText().toString()),
-                                Integer.parseInt(team2_passes.getText().toString()),
-                                Integer.parseInt(team2_card.getText().toString()),
-                                Integer.parseInt(team2_out.getText().toString()),
-                                Integer.parseInt(team2_fault.getText().toString()),
-                                Integer.parseInt(team2_corner.getText().toString()));
-                    }});
+            new Thread(() -> handlerdb.post(() -> myDB.addMatchDB(team1_Name.getText().toString(),
+                    Integer.parseInt(team1_score.getText().toString()),
+                    Float.parseFloat(team1_possession.getText().toString()),
+                    Integer.parseInt(team1_shot.getText().toString()),
+                    Integer.parseInt(team1_shotTarget.getText().toString()),
+                    Integer.parseInt(team1_passes.getText().toString()),
+                    Integer.parseInt(team1_card.getText().toString()),
+                    Integer.parseInt(team1_out.getText().toString()),
+                    Integer.parseInt(team1_fault.getText().toString()),
+                    Integer.parseInt(team1_corner.getText().toString()),
+                    team2_Name.getText().toString(),
+                    Integer.parseInt(team2_score.getText().toString()),
+                    Float.parseFloat(team2_possession.getText().toString()),
+                    Integer.parseInt(team2_shot.getText().toString()),
+                    Integer.parseInt(team2_shotTarget.getText().toString()),
+                    Integer.parseInt(team2_passes.getText().toString()),
+                    Integer.parseInt(team2_card.getText().toString()),
+                    Integer.parseInt(team2_out.getText().toString()),
+                    Integer.parseInt(team2_fault.getText().toString()),
+                    Integer.parseInt(team2_corner.getText().toString())))).start();
         });
 
         // 1- Request access to the location service
@@ -234,7 +233,7 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     }
 
     private void dispatchTakePictureIntent() {
-        handler.post( () -> {
+        new Thread(() -> handler.post( () -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             // Ensure that there's a camera activity to handle the intent
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -247,13 +246,14 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
                     // Create a Uri to store the picture
-                    Uri photoURI = FileProvider.getUriForFile(this,"com.fr.android.footballtracker.android.fileprovider", photoFile);
+                    Uri photoURI = FileProvider.getUriForFile(MatchCreation.this,"com.fr.android.footballtracker.android.fileprovider", photoFile);
                     // We send to the intent the Uri where to save the file
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
                 }
             }
-        });
+        })).start();
+
     }
 
     @Override

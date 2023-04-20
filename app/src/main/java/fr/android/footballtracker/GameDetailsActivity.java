@@ -63,15 +63,15 @@ public class GameDetailsActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuCreate) {
-                handler.post(()-> {
+                new Thread(() -> handler.post(()-> {
                     Intent intent = new Intent(GameDetailsActivity.this, MatchCreation.class);
                     startActivity(intent);
-                });
+                })).start();
             } else if (id == R.id.menuHistory) {
-                handler.post(()-> {
+                new Thread(() -> handler.post(()-> {
                     Intent intent = new Intent(GameDetailsActivity.this, History.class);
                     startActivity(intent);
-                });
+                })).start();
             }
             return true;
         });
