@@ -15,23 +15,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 
 public class History extends AppCompatActivity {
-    RecyclerView recyclerView;
-    BottomNavigationView bottomNavigationView;
-    Handler handler;
-    MyDataBaseHelper myDB;
-    ArrayList<String> teamName1, teamName2, score, id;
-    CustomAdapter customAdapter;
+    private Handler handler;
+    private MyDataBaseHelper myDB;
+    private ArrayList<String> teamName1, teamName2, score, id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        recyclerView = findViewById(R.id.recyclerViewHistory);
-        bottomNavigationView = findViewById(R.id.bottomNavMenu);
+        final RecyclerView recyclerView = findViewById(R.id.recyclerViewHistory);
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavMenu);
         handler = new Handler();
 
         // Load Data from sqlite
-        myDB = new MyDataBaseHelper(History.this);
+        myDB = new MyDataBaseHelper(this);
         teamName1 = new ArrayList<>();
         teamName2 = new ArrayList<>();
         score = new ArrayList<>();
@@ -42,7 +40,7 @@ public class History extends AppCompatActivity {
             int id = item.getItemId();
             if (id == R.id.menuCreate) {
                 new Thread(() -> handler.post(()-> {
-                    Intent intent = new Intent(History.this, MatchCreation.class);
+                    Intent intent = new Intent(this, MatchCreation.class);
                     startActivity(intent);
                 })).start();
             }
@@ -50,14 +48,14 @@ public class History extends AppCompatActivity {
         });
 
         storeDataInArray();
-        customAdapter = new CustomAdapter(History.this, teamName1, teamName2, score, id);
+        CustomAdapter customAdapter = new CustomAdapter(this, teamName1, teamName2, score, id);
         recyclerView.setAdapter(customAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(History.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     void storeDataInArray (){
         // Get all row store in our table matchs
-        Cursor cursor = myDB.readAllMatch();
-        if (cursor.getCount() == 0){
+        final Cursor cursor = myDB.readAllMatch();
+        if (cursor == null || cursor.getCount() == 0){
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }else{
             // We get juste the important informations

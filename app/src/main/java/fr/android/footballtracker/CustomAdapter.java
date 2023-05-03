@@ -15,9 +15,12 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     private final Context context;
-    private ArrayList<String> Team1, Team2, Score, id;
+    private final ArrayList<String> Team1;
+    private final ArrayList<String> Team2;
+    private final ArrayList<String> Score;
+    private final ArrayList<String> id;
 
-    CustomAdapter(Context context, ArrayList<String> Team1,ArrayList<String> Team2, ArrayList<String> Score, ArrayList<String> id){
+    CustomAdapter(final Context context, final ArrayList<String> Team1, final ArrayList<String> Team2, final ArrayList<String> Score, final ArrayList<String> id){
         this.context = context;
         this.Team1 = Team1;
         this.Team2 = Team2;
@@ -26,16 +29,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
     @NonNull
     @Override
-    public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         // Create a view from XML layout
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycler_row_history, parent, false);
+        final LayoutInflater inflater = LayoutInflater.from(context);
+        final View view = inflater.inflate(R.layout.recycler_row_history, parent, false);
         return new MyViewHolder(view);
     }
 
     // Remplace value inside a view (call by the layer manager)
     @Override
-    public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CustomAdapter.MyViewHolder holder, final int position) {
         holder.Team1.setText(String.valueOf(Team1.get(position)));
         holder.Team2.setText(String.valueOf(Team2.get(position)));
         holder.Score.setText(String.valueOf(Score.get(position)));
@@ -53,10 +56,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     // Internal class that represents the views of the list
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Team1, Team2, Score;
         LinearLayout mainLayout;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
             Team1 = itemView.findViewById(R.id.Team1);
             Team2 = itemView.findViewById(R.id.Team2);
