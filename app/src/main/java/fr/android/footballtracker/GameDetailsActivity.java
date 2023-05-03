@@ -13,19 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class GameDetailsActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
-    Handler handler;
-    TextView location, name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
-    TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
-    TextView statShotSuccess1, statShotSuccess2, statFaultTransfCard1, statFaultTransfCard2;
-    MyDataBaseHelper myDB;
+    private Handler handler;
+    private TextView location, name1, score, statPossession1, statShot1, statShotOnTarget1, statPasses1, statCards1, statOut1, statFault1, statCorner1;
+    private TextView name2, statPossession2, statShot2, statShotOnTarget2, statPasses2, statCards2, statOut2, statFault2, statCorner2;
+    private TextView statShotSuccess1, statShotSuccess2, statFaultTransfCard1, statFaultTransfCard2;
+    private MyDataBaseHelper myDB;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_details);
-        bottomNavigationView = findViewById(R.id.bottomNavMenu);
+
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavMenu);
         location = findViewById(R.id.location);
         score = findViewById(R.id.scoreMatch);
 
@@ -78,22 +78,20 @@ public class GameDetailsActivity extends AppCompatActivity {
         getIntentData();
     }
 
-    void getIntentData(){
+    void getIntentData() {
         if(getIntent().hasExtra("id")){
-            String idMatch = getIntent().getStringExtra("id");
+            final String idMatch = getIntent().getStringExtra("id");
             setDataInFieldOnScreen(idMatch);
         }else{
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }
     }
     @SuppressLint("SetTextI18n")
-    void setDataInFieldOnScreen (String id){
-        // Get all row store in our table matchs
-        Cursor cursor = myDB.readMatchId(id);
-        if (cursor.getCount() == 0){
+    void setDataInFieldOnScreen (final String id) {
+        final Cursor cursor = myDB.readMatchId(id);
+        if (cursor == null || cursor.getCount() == 0){
             Toast.makeText(this, "No data", Toast.LENGTH_SHORT).show();
         }else{
-            // We get juste the important informations
             while(cursor.moveToNext()){
                 score.setText(cursor.getString(2) + " - " +cursor.getString(12));
                 location.setText(cursor.getString(21));

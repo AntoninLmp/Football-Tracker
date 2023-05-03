@@ -1,26 +1,20 @@
 package fr.android.footballtracker;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.icu.text.SimpleDateFormat;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.tv.AdRequest;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,22 +32,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class MatchCreation extends AppCompatActivity implements LocationListener {
-    private static final int PERMISSION_CAMERA_CODE = 100;
+    private Handler handler;
     private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int LOCATION_REQUEST_CODE = 2;
     private LocationManager locationManager;
     private String location;
-
-    private Handler handlerdb = new Handler(Looper.getMainLooper());
-    BottomNavigationView bottomNavigationView;
-    Handler handler;
-    ImageButton buttonPhoto;
-    Button buttonSave;
-    String currentPhotoPath;
-    EditText team1_Name, team1_score, team1_possession, team1_shot, team1_shotTarget, team1_passes, team1_card, team1_out, team1_fault, team1_corner;
-    EditText team2_Name, team2_score, team2_possession, team2_shot, team2_shotTarget, team2_passes, team2_card, team2_out, team2_fault, team2_corner;
+    private String currentPhotoPath;
+    private EditText team1_Name, team1_score, team1_possession, team1_shot, team1_shotTarget, team1_passes, team1_card, team1_out, team1_fault, team1_corner;
+    private EditText team2_Name, team2_score, team2_possession, team2_shot, team2_shotTarget, team2_passes, team2_card, team2_out, team2_fault, team2_corner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +49,8 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         setContentView(R.layout.activity_match_creation);
         handler = new Handler();
 
-        bottomNavigationView = findViewById(R.id.bottomNavMenu);
-        buttonPhoto = findViewById(R.id.buttonPhoto);
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavMenu);
+        final ImageButton buttonPhoto = findViewById(R.id.buttonPhoto);
 
         // First Team
         team1_Name = findViewById(R.id.NameTeam1);
@@ -88,28 +75,26 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         team2_fault = findViewById(R.id.fault2);
         team2_corner = findViewById(R.id.corner2);
         // Saving button
-        buttonSave = findViewById(R.id.buttonSave);
+        final Button buttonSave = findViewById(R.id.buttonSave);
 
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menuHistory) {
                 new Thread(() -> handler.post(() -> {
-                    Intent intent = new Intent(MatchCreation.this, History.class);
+                    Intent intent = new Intent(this, History.class);
                     startActivity(intent);
                 })).start();
 
             }
             return true;
         });
-        buttonPhoto.setOnClickListener( view -> {
-            askPermission();
-        });
+        buttonPhoto.setOnClickListener(view -> askPermissions());
 
 
         buttonSave.setOnClickListener(view -> {
-            MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
-            myDB.addMatch(team1_Name.getText().toString(),
+            final MyDataBaseHelper myDB = new MyDataBaseHelper(MatchCreation.this);
+            myDB.addMatchToSqliteDb(team1_Name.getText().toString(),
                     Integer.parseInt(team1_score.getText().toString()),
                     Float.parseFloat(team1_possession.getText().toString()),
                     Integer.parseInt(team1_shot.getText().toString()),
@@ -130,7 +115,8 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                     Integer.parseInt(team2_fault.getText().toString()),
                     Integer.parseInt(team2_corner.getText().toString()),
                     location);
-            new Thread(() -> handlerdb.post(() -> myDB.addMatchDB(team1_Name.getText().toString(),
+
+            myDB.addMatchToExternalDb(team1_Name.getText().toString(),
                     Integer.parseInt(team1_score.getText().toString()),
                     Float.parseFloat(team1_possession.getText().toString()),
                     Integer.parseInt(team1_shot.getText().toString()),
@@ -149,7 +135,7 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
                     Integer.parseInt(team2_card.getText().toString()),
                     Integer.parseInt(team2_out.getText().toString()),
                     Integer.parseInt(team2_fault.getText().toString()),
-                    Integer.parseInt(team2_corner.getText().toString())))).start();
+                    Integer.parseInt(team2_corner.getText().toString()));
         });
 
         // 1- Request access to the location service
@@ -160,18 +146,11 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     protected void onResume() {
         super.onResume();
 
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+        final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, permissions, LOCATION_REQUEST_CODE);
         }
-
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        }
-
-        // 2- Register to receive the locations events
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, this);
     }
 
     @Override
@@ -182,17 +161,17 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         locationManager.removeUpdates(this);
     }
 
-    private void askPermission() {
+    private void askPermissions() {
         // Check if the permission has been already been given
-        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+        final String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.CAMERA};
 
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),permissions[0]) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) == PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_CAMERA_CODE);
-        }else{
+        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), permissions[0]) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this.getApplicationContext(), permissions[1]) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this.getApplicationContext(), permissions[2]) == PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, permissions, CAMERA_REQUEST_CODE);
+        } else {
             dispatchTakePictureIntent();
         }
     }
@@ -200,12 +179,20 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_CAMERA_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
-            }else {
+            } else {
                 // It's means the user doesn't give the permission to use it
-                handler.post(Toast.makeText(this, "Permission is required to use the camera", Toast.LENGTH_SHORT)::show);
+                Toast.makeText(this, "Permission is required to use the camera", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == LOCATION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+                // 2- Register to receive the locations events
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 15000L, 10F, this);
             }
         }
     }
@@ -214,9 +201,9 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PERMISSION_CAMERA_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK){
             //Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-            File newfile = new File(currentPhotoPath);
+            new File(currentPhotoPath);
 
             // to do
         }
@@ -263,15 +250,16 @@ public class MatchCreation extends AppCompatActivity implements LocationListener
         final double longitude = location.getLongitude();
 
         final Geocoder geocoder = new Geocoder(this);
+        new Thread(() -> {
+            try {
+                final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
-        try {
-            final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-
-            if (addresses != null) {
-                this.location = addresses.get(0).getAddressLine(0);
+                if (addresses != null) {
+                    this.location = addresses.get(0).getAddressLine(0);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        }).start();
     }
 }
