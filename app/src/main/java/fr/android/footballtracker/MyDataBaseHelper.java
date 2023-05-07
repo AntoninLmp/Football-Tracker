@@ -91,6 +91,16 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         new Thread(() -> {
             final SQLiteDatabase db = this.getWritableDatabase();
 
+            Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_MATCH, null);
+            cursor.moveToFirst();
+            int matchCount = cursor.getInt(0);
+            cursor.close();
+            
+            if (matchCount == 5) {
+                db.execSQL("DELETE FROM " + TABLE_MATCH + " WHERE id = (SELECT MIN(id) FROM " + TABLE_MATCH + ")");
+            }
+
+
             final ContentValues contentValues = new ContentValues();
             contentValues.put("team1_name",team1_name);
             contentValues.put("team1_score", team1_score);
